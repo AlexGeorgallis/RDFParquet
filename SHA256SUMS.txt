@@ -1,0 +1,2 @@
+636d06f48b1001b227eaf73e2845043d6ebf4c5034d33562fc76f57ecd17df81  rdfparquet-loader.jar
+ae56c7e21bc0d41869a50d3d9ec1ea909d95abb4fe71962f278a9507b51d4483  rdfparquet-server.jar

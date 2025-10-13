@@ -17,9 +17,5 @@ data/
 *.nt
 *.rdf
 *.owl
-dictionary-loader.jar
-dictionary-server.jar
-rdfparquet-loader.jar
-rdfparquet-server.jar
-original-dictionary-loader.jar
-original-dictionary-server.jar
+*.jar
+
