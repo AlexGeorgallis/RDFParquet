@@ -13,6 +13,10 @@ data/
 *.tar
 *.gz
 *.class
+*.ttl
+*.nt
+*.rdf
+*.owl
 dictionary-loader.jar
 dictionary-server.jar
 rdfparquet-loader.jar
