@@ -39,7 +39,6 @@ public class EncodedParquetQuery {
 
     private List<EncodedTriplet> executeIds(java.nio.file.Path parquetPathNio, FilterCompat.Filter filter)
             throws IOException {
-        long start = System.nanoTime();
         List<EncodedTriplet> out = new ArrayList<>();
 
         try (ParquetReader<EncodedTriplet> reader =
@@ -49,9 +48,6 @@ public class EncodedParquetQuery {
                 out.add(new EncodedTriplet(et.getSubject(), et.getPredicate(), et.getObject()));
             }
         }
-        long end = System.nanoTime();
-        System.out.printf("Path: %s – %,d rows in %,f ms%n",
-                parquetPathNio.toAbsolutePath(), out.size(), (end - start) / 1_000_000.0);
         return out;
     }
 
