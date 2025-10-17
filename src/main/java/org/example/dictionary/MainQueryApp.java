@@ -456,7 +456,6 @@ public class MainQueryApp {
         Runtime rt = Runtime.getRuntime();
         long used = (rt.totalMemory() - rt.freeMemory()) / (1024 * 1024);
         long max  = rt.maxMemory() / (1024 * 1024);
-        System.out.printf("RAM: Used: %d MB, Max: %d MB%n", used, max);
     }
 
     private static String escapeHtml(String s) {
