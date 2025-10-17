@@ -1,0 +1,60 @@
+name: Release
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build-and-release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+          cache: maven
+
+      - name: Build (skip tests for speed)
+        run: mvn -B -ntp clean package -DskipTests
+
+     
+      - name: Collect artifacts
+        shell: bash
+        run: |
+          set -e
+         
+          L=$(find . -type f -path "*/target/*" -name "rdfparquet-loader*.jar" | head -n1 || true)
+          S=$(find . -type f -path "*/target/*" -name "rdfparquet-server*.jar" | head -n1 || true)
+
+          if [ -f rdfparquet-loader.jar ]; then L=rdfparquet-loader.jar; fi
+          if [ -f rdfparquet-server.jar ]; then S=rdfparquet-server.jar; fi
+     
+          [ -n "$L" ] && cp "$L" rdfparquet-loader.jar
+          [ -n "$S" ] && cp "$S" rdfparquet-server.jar
+          ls -lh rdfparquet-*.jar
+
+      - name: Verify artifacts
+        run: |
+          test -f rdfparquet-loader.jar
+          test -f rdfparquet-server.jar
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ github.ref_name }}
+          name: RDFParquet ${{ github.ref_name }}
+          body: |
+            Automated release for ${{ github.ref_name }}.
+            - Includes rdfparquet-loader.jar and rdfparquet-server.jar
+          files: |
+            rdfparquet-loader.jar
+            rdfparquet-server.jar
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
