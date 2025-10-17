@@ -357,9 +357,6 @@ public class QueryExec {
                     joinMatches++;
 
                     if (expectedSize > 100000) {
-                        System.out.printf("    Large join group: %d x %d = %,d rows%n",
-
-                                leftMatches, rightMatches, expectedSize);
 
                         List<int[]> batch = new ArrayList<>(expectedSize);
 
@@ -411,10 +408,6 @@ public class QueryExec {
             if (estimatedSize > Integer.MAX_VALUE) {
                 throw new RuntimeException("Cross join result too large: " + estimatedSize);
             }
-
-            System.out.printf("    Cross join: %,d × %,d = %,d rows%n",
-
-                    L.size(), R.size(), estimatedSize);
 
             out = new ArrayList<>((int) estimatedSize);
 

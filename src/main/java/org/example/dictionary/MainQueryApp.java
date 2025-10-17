@@ -57,7 +57,6 @@ public class MainQueryApp {
             DictionaryLoader.load(DataPaths.dictPath().toString());
             int size = DictionaryEncoder.getInstance().getEncodeMap().size();
             System.out.println("Dictionary loaded. Total entries: " + size);
-            printMemoryUsage();
         } catch (Exception e) {
             System.err.println("Warning: Could not load dictionary: " + e.getMessage());
         }
@@ -207,7 +206,6 @@ public class MainQueryApp {
 
                 try { csvFuture.get(30, TimeUnit.SECONDS); } catch (Exception ignore) {}
 
-                printMemoryUsage();
             } catch (Exception e) {
                 error = e.getMessage();
             }
@@ -450,12 +448,6 @@ public class MainQueryApp {
     private static void sendError(HttpExchange ex, String message) throws IOException {
         String html = htmlPage("<h2>Error</h2><p style='color:red;'>" + escapeHtml(message) + "</p>");
         send200(ex, html, "text/html");
-    }
-
-    private static void printMemoryUsage() {
-        Runtime rt = Runtime.getRuntime();
-        long used = (rt.totalMemory() - rt.freeMemory()) / (1024 * 1024);
-        long max  = rt.maxMemory() / (1024 * 1024);
     }
 
     private static String escapeHtml(String s) {
