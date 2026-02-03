@@ -8,7 +8,7 @@
 
 # RDFParquet
 
-> A lightweight RDF engine that stores and manages triples using the Apache Parquet columnar format — developed as part of my Diploma Thesis at the University of Ioannina.
+> A lightweight RDF engine that stores and manages triples using the Apache Parquet columnar format, developed as part of my Diploma Thesis at the University of Ioannina.
 
 [![Build](https://img.shields.io/github/actions/workflow/status/AlexGeorgallis/RDFParquet/ci.yml?label=Build)](../../actions)
 [![Release](https://img.shields.io/github/v/release/AlexGeorgallis/RDFParquet)](../../releases)
